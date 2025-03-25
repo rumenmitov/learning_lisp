@@ -53,3 +53,7 @@ The repo title is a bit misleading. The code in here is just me messing around w
 #+RESULTS:
 : t
 : (("rumen" 20 "cs") ("kendrick" 35 "music") ("rihanna" 42 "music"))
+
+
+*** Testing
+The unit tests are written with [[https://www.gnu.org/software/emacs/manual/html_mono/ert.html][ERT]] and they are present in each source file.
