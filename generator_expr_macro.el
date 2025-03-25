@@ -65,5 +65,4 @@ Example Usage:
   (should (equal (gen--expr iterate x thru nil if (> x 2) identity) nil)))
 
 
-;; Example usage when you want to reduce the final list
-;; (seq-reduce '+ (mapcar 'apply (gen--expr iterate x thru '(1 2 3 5 6 7 8) if (> x 2) identity)) 0)
+(provide 'gen--expr)

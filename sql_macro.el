@@ -47,3 +47,4 @@ Example usage:
     (sqlite-close db)))
 
 
+(provide 'sql--do)

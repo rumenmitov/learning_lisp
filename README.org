@@ -1,0 +1,55 @@
+#+title: Learning LISP
+#+author: Rumen Mitov
+
+The repo title is a bit misleading. The code in here is just me messing around with macros and creating my own syntax for things like:
+- [[https://www.geeksforgeeks.org/generators-in-python/][Generator Expressions]] (they already exist in ELISP, but I made custom syntax for it)
+- C-Scopes
+- SQL
+
+
+*** Examples
+**** Generator Expressions
+#+begin_src emacs-lisp :results output :exports both
+  (load-file "./generator_expr_macro.el")
+  (prin1 (gen--expr iterate x thru '(1 2 3) if (> x 2)))
+#+end_src
+
+#+RESULTS:
+: (3)
+
+#+begin_src emacs-lisp :exports both
+  (load-file "./generator_expr_macro.el")
+  ;; Example usage when you want to reduce the final list
+  (seq-reduce '+ (mapcar 'apply (gen--expr iterate x thru '(1 2 3 5 6 7 8) if (> x 2) identity)) 0)
+#+end_src
+
+#+RESULTS:
+: 29
+
+**** C-Scopes
+#+begin_src emacs-lisp :results output :exports both
+  (load-file "./c_scopes_macro.el")
+  ({
+   (prin1 (+ 1 1))
+   (print "Hello from C, no wait... this is ELISP!")
+     })
+#+end_src
+
+#+RESULTS:
+: 2
+: "Hello from C, no wait... this is ELISP!"
+
+**** SQL
+#+begin_src emacs-lisp :results output :exports both
+  (load-file "./sql_macro.el")
+  (let ((db (sqlite-open)))
+    (prin1 (sql--do :db db :op set CREATE TABLE students(name VARCHAR\, age INT\, course VARCHAR)\;
+  	   INSERT INTO students(name\, age\, course) VALUES("rumen"\, 20\, "cs")\;
+  	   INSERT INTO students(name\, age\, course) VALUES("kendrick"\, 35\, "music")\;
+  	   INSERT INTO students(name\, age\, course) VALUES("rihanna"\, 42\, "music")\;))
+    (print (sql--do :db db :op get SELECT * FROM students\;)))
+#+end_src
+
+#+RESULTS:
+: t
+: (("rumen" 20 "cs") ("kendrick" 35 "music") ("rihanna" 42 "music"))

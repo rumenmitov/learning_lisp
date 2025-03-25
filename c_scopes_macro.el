@@ -28,3 +28,4 @@ Example usage:
   (should (eq ({ (+ 1 1) (* 2 3) }) 6)))
 
 
+(provide '{)
